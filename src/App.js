@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from './components/Navbar';
+import Feed from './components/Feed';
+import { fetchDogs } from './components/fetch';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import {useState, useEffect} from 'react'
+
+import './index.css'
 
 function App() {
+  const [breed, setBreed] = useState('Hound')
+  const [dogs, setDogs] = useState([])
+  useEffect(() => {
+    fetchDogs(breed.toLowerCase())
+    .then(data => setDogs(data.message))
+  }, [breed])
+  console.log(dogs)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Navbar breed={breed} setBreed={setBreed}></Navbar>
+      <Feed dogs={dogs} breed={breed}></Feed>
+    </BrowserRouter>  
   );
 }
 
