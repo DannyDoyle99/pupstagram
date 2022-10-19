@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {useState, useEffect} from 'react'
 
 import './index.css'
+import Footer from './components/Footer';
 
 function App() {
   const [breed, setBreed] = useState('Hound')
@@ -18,6 +19,7 @@ function App() {
     <BrowserRouter>
       <Navbar breed={breed} setBreed={setBreed}></Navbar>
       <Feed dogs={dogs} breed={breed}></Feed>
+      <Footer></Footer>
     </BrowserRouter>  
   );
 }
